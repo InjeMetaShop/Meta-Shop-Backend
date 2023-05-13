@@ -9,7 +9,7 @@
         <option name="gradleJvm" value="#JAVA_HOME" />
         <option name="modules">
           <set>
-            <option value="$PROJECT_DIR$/MetaShop" />
+            <option value="$PROJECT_DIR$/metaShop" />
           </set>
         </option>
       </GradleProjectSettings>
