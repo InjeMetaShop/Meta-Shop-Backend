@@ -8,3 +8,13 @@
 #  jpa:
 #    hibernate:
 #      ddl-auto: update # 처음에는 create
+spring:
+  data:
+    mongodb:
+      port: 27017
+      authentication-database: admin
+      database: metashop
+      username: LeeHY
+      password: 1234
+      ssl: true
+      uri: mongodb+srv://LeeHY:1234@cluster0.9jkksvw.mongodb.net/?retryWrites=true&w=majority
