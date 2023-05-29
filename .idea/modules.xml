@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Meta-Shop-Backend.iml" filepath="$PROJECT_DIR$/.idea/Meta-Shop-Backend.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/MetaShop.main.iml" filepath="$PROJECT_DIR$/.idea/modules/MetaShop.main.iml" />
     </modules>
   </component>
 </project>

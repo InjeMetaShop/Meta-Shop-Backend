@@ -2,11 +2,9 @@ package com.injeMetaShop.metaShop.controller;
 
 
 import com.injeMetaShop.metaShop.authorize.jwt.AuthDto;
-import com.injeMetaShop.metaShop.dto.RoleDto;
 import com.injeMetaShop.metaShop.entity.User;
 import com.injeMetaShop.metaShop.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -46,14 +44,5 @@ public class AdminController {
 
         userService.registerAdmin(newSignupDto);
         return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-
-    @Operation(summary = "User 권한변경", description = "Admin이 User의 권한을 변경하는 기능입니다. <br>Role이 ADMIN인 회원만 접속할 수 있습니다. <br>\"role\": \"role종류\" 만 작성해도 변경이 가능합니다.")
-    @PostMapping("/users/{userId}")
-    public ResponseEntity<?> updateUserRole(
-            @Parameter(description = "파라미터는 유저의ID값을 입력합니다. <br>ex) 2")
-            @PathVariable("userId") Long userId, @RequestBody RoleDto roleDto){
-        return ResponseEntity.ok(userService.updateUserRole(userId, roleDto));
     }
 }

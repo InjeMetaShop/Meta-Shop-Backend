@@ -1,7 +1,6 @@
 package com.injeMetaShop.metaShop.service;
 
 import com.injeMetaShop.metaShop.authorize.jwt.AuthDto;
-import com.injeMetaShop.metaShop.dto.RoleDto;
 import com.injeMetaShop.metaShop.entity.User;
 import com.injeMetaShop.metaShop.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -31,8 +30,8 @@ public class UserService {
     }
 
     private void validateDuplicateMember(String email){
-        Optional<User> user = userRepository.findByEmail(email);
-        if (user.isPresent()) {
+        Optional<User> userModel = userRepository.findByEmail(email);
+        if (userModel.isPresent()) {
             throw new IllegalStateException("이미 존재하는 회원입니다.");
         }
     }
@@ -40,11 +39,4 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public User updateUserRole(Long id, RoleDto roleDto){
-        User user = userRepository.findById(id).orElseThrow(()->{
-            throw new IllegalStateException("User 정보를 다시 확인하세요");});
-        user.changeUserRole(roleDto);
-        userRepository.saveAndFlush(user);
-        return user;
-    }
 }
