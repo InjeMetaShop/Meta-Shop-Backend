@@ -1,0 +1,63 @@
+package com.injeMetaShop.metaShop.controller;
+
+import com.injeMetaShop.metaShop.dto.ProductDto;
+import com.injeMetaShop.metaShop.entity.Product;
+import com.injeMetaShop.metaShop.service.ProductService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@Tag(name = "3. 상품 페이지", description = "상품 관련 api")
+@RestController
+@RequestMapping("/api/product")
+@RequiredArgsConstructor
+public class ProductController {
+    private final ProductService productService;
+
+    @Operation(summary = "상품 조회", description = "등록된 모든 상품 조회")
+    @GetMapping("/all")
+    public @ResponseBody ResponseEntity dashboard(){
+        List<Product> productList;
+        try{
+            productList = productService.allProduct();
+        } catch(IllegalStateException e){
+            return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
+        } return new ResponseEntity(productList, HttpStatus.OK);
+    }
+
+    @Operation(summary = "카테고리에 대한 상품 조회", description = "사용자가 원하는 카테고리에 해당하는 상품 조회")
+    @GetMapping("/category/{category}")
+    ResponseEntity categoryOfProduct(@Parameter(description = "파라미터는 원하는 category를 입력합니다." + "<br>ex) 상의") @PathVariable("category") String category){
+        List<Product> productList;
+        try{
+            productList = productService.categoryOfProduct(category);
+        } catch(IllegalStateException e){
+            return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
+        } return new ResponseEntity(productList, HttpStatus.OK);
+    }
+
+    @Operation(summary = "성별에 대한 상품 조회", description = "사용자가 원하는 카테고리에 해당하는 상품 조회")
+    @GetMapping("/sex/{sex}")
+    ResponseEntity sexOfProduct(@Parameter(description = "파라미터는 원하는 category를 입력합니다." + "<br>ex) 상의") @PathVariable("sex") String sex){
+        List<Product> productList;
+        try{
+            productList = productService.sexOfProdcut(sex);
+        } catch(IllegalStateException e){
+            return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
+        } return new ResponseEntity(productList, HttpStatus.OK);
+    }
+
+    @Operation(summary = "상품 추가", description = "상품을 추가합니다.")
+    @PostMapping("/add")
+    public ResponseEntity<Void> addProduct(@RequestBody @Valid ProductDto productDto){
+        productService.addProduct(productDto);
+        return new ResponseEntity(HttpStatus.OK);
+    }
+}

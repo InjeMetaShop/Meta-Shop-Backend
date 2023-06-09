@@ -47,10 +47,10 @@ public class SecurityConfig {
 
     private static final String[] AUTH_WHITELIST = {
             "/api/ping", "/swagger-ui/**","/meta-shop-api.html/**","/api-docs/json/**","/api/save",
-            "/api/auth/**","/api/admin/signup", "/api/login/**"
+            "/api/auth/**","/api/admin/signup", "/api/login/**",
     };
     private static final String[] AUTH_ADMIN = {
-            "/api/admin/**"
+            "/api/admin/**", "/api/product/**"
     };
     private static final String[] AUTH_USER = {
             "/api/user"
