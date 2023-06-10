@@ -45,7 +45,7 @@ public class ProductController {
 
     @Operation(summary = "성별에 대한 상품 조회", description = "사용자가 원하는 카테고리에 해당하는 상품 조회")
     @GetMapping("/sex/{sex}")
-    ResponseEntity sexOfProduct(@Parameter(description = "파라미터는 원하는 category를 입력합니다." + "<br>ex) 상의") @PathVariable("sex") String sex){
+    ResponseEntity sexOfProduct(@Parameter(description = "파라미터는 원하는 성별을 입력합니다." + "<br>ex) 상의") @PathVariable("sex") String sex){
         List<Product> productList;
         try{
             productList = productService.sexOfProdcut(sex);
