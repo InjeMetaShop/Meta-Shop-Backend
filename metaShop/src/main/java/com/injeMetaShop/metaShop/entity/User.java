@@ -12,6 +12,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import java.util.ArrayList;
+
 @Getter
 @NoArgsConstructor
 @Document(collection = "users")
@@ -29,15 +31,20 @@ public class User {
     @Field(name = "name")
     private String name;
 
+    @Field(name = "purchase")
+    private String[] purchase;
+
     @Field(name = "role")
     private Role role;
 
     @Builder
-    public User(String email, String password, String name, Role role) {
+    public User(String email, String password, String name, String[] purchase, Role role) {
         this.email = email;
         this.password = password;
         this.name = name;
+        this.purchase = purchase;
         this.role = role;
+
     }
 
     public static User registerUser(AuthDto.SignupDto signupDto){
@@ -46,6 +53,7 @@ public class User {
                 .password(signupDto.getPassword())
                 .name(signupDto.getName())
                 .role(Role.USER)
+                .purchase(new String[]{"basic item"})
                 .build();
     }
 

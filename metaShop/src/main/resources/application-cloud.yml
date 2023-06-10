@@ -1,0 +1,6 @@
+spring:
+  cloud:
+    gcp:
+      storage:
+        credentials:
+          location: classpath:confident-craft-388215-d1da83653deb.json

@@ -46,6 +46,9 @@ dependencies {
 	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.1'
 	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.1'
 
+	// Google Cloud Storage
+	implementation 'org.springframework.cloud:spring-cloud-gcp-starter-storage'
+
 	//TE
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 }

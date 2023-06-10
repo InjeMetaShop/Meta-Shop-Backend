@@ -20,6 +20,9 @@ public class UserDto {
     @Schema(description = "이름", example = "홍길동")
     private String name;
 
+    @Schema(description = "구매목록", example = "상의, 하의")
+    private String[] purchase;
+
     @Schema(description = "권한")
     private Role role;
 
