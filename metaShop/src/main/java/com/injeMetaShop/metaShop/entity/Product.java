@@ -2,11 +2,11 @@ package com.injeMetaShop.metaShop.entity;
 
 import com.injeMetaShop.metaShop.dto.ProductDto;
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -16,10 +16,11 @@ import org.springframework.data.mongodb.core.mapping.Field;
 public class Product {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private String id;
 
     @Field(name = "name")
+    @Indexed(unique = true) // 중복 제약 설정
     private String name;
 
     @Field(name = "price")
@@ -35,8 +36,7 @@ public class Product {
     private String category;
 
     @Builder
-    public Product(String id, String name, int price, String imagePath, String sex, String category) {
-        this.id = id;
+    public Product(String name, int price, String imagePath, String sex, String category) {
         this.name = name;
         this.price = price;
         this.imagePath = imagePath;
