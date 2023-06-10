@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Tag(name = "3. 상품 페이지", description = "상품 관련 api")
 @RestController
@@ -59,5 +60,16 @@ public class ProductController {
     public ResponseEntity<Void> addProduct(@RequestBody @Valid ProductDto productDto){
         productService.addProduct(productDto);
         return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @Operation(summary = "ID값에 대한 상품 조회", description = "사용자가 원하는 ID에 해당하는 상품 조회")
+    @GetMapping("/{id}")
+    ResponseEntity findById(@Parameter(description = "파라미터는 원하는 ID를 입력합니다." + "<br>ex) 64847e4fd4b8925200fad6f8") @PathVariable("id") String id){
+        Optional<Product> product;
+        try{
+            product = productService.findById(id);
+        } catch(IllegalStateException e){
+            return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
+        } return new ResponseEntity(product, HttpStatus.OK);
     }
 }
