@@ -10,7 +10,6 @@ import com.injeMetaShop.metaShop.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -47,13 +46,13 @@ public class ProductService {
 
         // Google Cloud Storage에 파일 업로드
         if (thumbnail != null && !thumbnail.isEmpty()) {
-            String thumbnailFileName = "thumbnails/" + thumbnail.getOriginalFilename();
+            String thumbnailFileName = "assets/thumbnails/" + thumbnail.getOriginalFilename();
             uploadFile(thumbnail, thumbnailFileName);
             product.setImagePath(getGoogleCloudStorageUrl(thumbnailFileName));
         }
 
         if (fbxFile != null && !fbxFile.isEmpty()) {
-            String fbxFileName = "fbxs/" + fbxFile.getOriginalFilename();
+            String fbxFileName = "assets/fbxs/" + fbxFile.getOriginalFilename();
             uploadFile(fbxFile, fbxFileName);
             product.setFbxPath(getGoogleCloudStorageUrl(fbxFileName));
         }
@@ -64,7 +63,7 @@ public class ProductService {
 
     private void uploadFile(MultipartFile file, String fileName) throws IOException {
         // 파일을 임시 경로에 저장
-        Path tempFile = Files.createTempFile("temp-", fileName);
+        Path tempFile = Files.createTempFile("temp-", "-suffix");
         Files.copy(file.getInputStream(), tempFile, StandardCopyOption.REPLACE_EXISTING);
 
         // Google Cloud Storage로 파일 업로드

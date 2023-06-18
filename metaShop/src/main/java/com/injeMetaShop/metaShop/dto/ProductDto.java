@@ -17,12 +17,6 @@ public class ProductDto {
     @Schema(description = "가격", example = "10000")
     private int price;
 
-    @Schema(description = "이미지 경로", example = "http://googleStorage")
-    private String imagePath;
-
-    @Schema(description = "fbx 경로", example = "http://gooleStorage")
-    private String fbxPath;
-
     @Schema(description = "성별", example = "male")
     private String sex;
 

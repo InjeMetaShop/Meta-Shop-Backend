@@ -58,11 +58,11 @@ public class ProductController {
     }
 
     @Operation(summary = "상품 추가", description = "상품을 추가합니다.")
-    @PostMapping("/add")
+    @PostMapping(value = "/add", consumes = { "multipart/form-data"})
     public ResponseEntity<Void> addProduct(
             @RequestPart("product") @Valid ProductDto productDto,
-            @RequestPart(value = "thumbnail", required = true) MultipartFile thumbnail,
-            @RequestPart(value = "fbxFile", required = true) MultipartFile fbxFile) throws IOException {
+            @RequestPart(value = "png", required = false) MultipartFile thumbnail,
+            @RequestPart(value = "fbx", required = false) MultipartFile fbxFile) throws IOException {
 
         productService.addProduct(productDto, thumbnail, fbxFile);
         return new ResponseEntity<>(HttpStatus.OK);

@@ -54,8 +54,6 @@ public class Product {
         Product product = new Product();
         product.name = productDto.getName();
         product.price = productDto.getPrice();
-        product.imagePath = productDto.getImagePath();
-        product.fbxPath = productDto.getFbxPath();
         product.sex = productDto.getSex();
         product.category = productDto.getCategory();
 
