@@ -11,7 +11,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -57,9 +59,13 @@ public class ProductController {
 
     @Operation(summary = "상품 추가", description = "상품을 추가합니다.")
     @PostMapping("/add")
-    public ResponseEntity<Void> addProduct(@RequestBody @Valid ProductDto productDto){
-        productService.addProduct(productDto);
-        return new ResponseEntity(HttpStatus.OK);
+    public ResponseEntity<Void> addProduct(
+            @RequestPart("product") @Valid ProductDto productDto,
+            @RequestPart(value = "thumbnail", required = true) MultipartFile thumbnail,
+            @RequestPart(value = "fbxFile", required = true) MultipartFile fbxFile) throws IOException {
+
+        productService.addProduct(productDto, thumbnail, fbxFile);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @Operation(summary = "ID값에 대한 상품 조회", description = "사용자가 원하는 ID에 해당하는 상품 조회")

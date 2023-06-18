@@ -2,5 +2,6 @@ spring:
   cloud:
     gcp:
       storage:
+        bucketName: meta-shop
         credentials:
-          location: classpath:confident-craft-388215-d1da83653deb.json
+          location: classpath:confident-craft-388215-8a3009902795.json

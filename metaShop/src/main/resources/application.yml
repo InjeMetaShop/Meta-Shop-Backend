@@ -9,3 +9,7 @@ spring:
       - security
       - document
       - cloud
+    google:
+      cloud:
+        storage:
+          bucketName: meta-shop
