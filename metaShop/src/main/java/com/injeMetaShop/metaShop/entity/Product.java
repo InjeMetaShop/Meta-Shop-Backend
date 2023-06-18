@@ -29,6 +29,9 @@ public class Product {
     @Field(name = "imagePath")
     private String imagePath;
 
+    @Field(name = "fbxPath")
+    private String fbxPath;
+
     @Field(name = "sex")
     private String sex;
 
@@ -36,10 +39,11 @@ public class Product {
     private String category;
 
     @Builder
-    public Product(String name, int price, String imagePath, String sex, String category) {
+    public Product(String name, int price, String imagePath, String fbxPath, String sex, String category) {
         this.name = name;
         this.price = price;
         this.imagePath = imagePath;
+        this.fbxPath = fbxPath;
         this.sex = sex;
         this.category = category;
     }
@@ -49,6 +53,7 @@ public class Product {
         product.name = productDto.getName();
         product.price = productDto.getPrice();
         product.imagePath = productDto.getImagePath();
+        product.fbxPath = productDto.getFbxPath();
         product.sex = productDto.getSex();
         product.category = productDto.getCategory();
 

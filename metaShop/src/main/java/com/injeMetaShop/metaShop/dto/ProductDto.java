@@ -20,6 +20,9 @@ public class ProductDto {
     @Schema(description = "이미지 경로", example = "http://googleStorage")
     private String imagePath;
 
+    @Schema(description = "fbx 경로", example = "http://gooleStorage")
+    private String fbxPath;
+
     @Schema(description = "성별", example = "male")
     private String sex;
 
