@@ -54,7 +54,7 @@ public class User {
                 .password(signupDto.getPassword())
                 .name(signupDto.getName())
                 .role(Role.USER)
-                .purchase(Collections.singletonList("default"))
+                .purchase(Collections.emptyList())
                 .build();
     }
 

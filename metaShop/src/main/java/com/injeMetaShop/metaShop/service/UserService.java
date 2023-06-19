@@ -35,6 +35,11 @@ public class UserService {
             throw new IllegalStateException("이미 존재하는 회원입니다.");
         }
     }
+
+    public List<String> checkUserPurchase(String email){
+        User user = userRepository.findByEmail(email).orElseThrow();
+        return user.getPurchase();
+    }
     public List<User> allMember()  {
         return userRepository.findAll();
     }

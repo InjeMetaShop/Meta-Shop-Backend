@@ -1,5 +1,7 @@
 package com.injeMetaShop.metaShop.authorize.jwt;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.injeMetaShop.metaShop.authorize.redis.RedisService;
 import com.injeMetaShop.metaShop.service.UserService;
 import io.jsonwebtoken.*;
@@ -15,7 +17,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.security.Key;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 @Slf4j
 @Component
@@ -27,6 +31,8 @@ public class JwtTokenProvider implements InitializingBean {
 
     private static final String AUTHORITIES_KEY = "role";
     private static final String EMAIL_KEY = "email";
+
+    private static final String PURCHASE_KEY = "purchase";
     private static final String url = "https://localhost:8080";
 
     private final String secretKey;
@@ -61,6 +67,9 @@ public class JwtTokenProvider implements InitializingBean {
     public AuthDto.TokenDto createToken(String email, String authorities){
         Long now = System.currentTimeMillis();
 
+        List<String> userPurchase = userService.checkUserPurchase(email);
+        String purchaseJson = convertListToJson(userPurchase);
+
         String accessToken = Jwts.builder()
                 .setHeaderParam("typ", "JWT")
                 .setHeaderParam("alg", "HS512")
@@ -68,9 +77,11 @@ public class JwtTokenProvider implements InitializingBean {
                 .setSubject("access-token")
                 .claim(url, true)
                 .claim(EMAIL_KEY, email)
+                .claim(PURCHASE_KEY, purchaseJson)
                 .claim(AUTHORITIES_KEY, authorities)
                 .signWith(signingKey, SignatureAlgorithm.HS512)
                 .compact();
+
 
         String refreshToken = Jwts.builder()
                 .setHeaderParam("typ", "JWT")
@@ -85,6 +96,14 @@ public class JwtTokenProvider implements InitializingBean {
 
 
     // == 토큰으로부터 정보 추출 == //
+    private String convertListToJson(List<String> list) {
+        try {
+            return new ObjectMapper().writeValueAsString(list);
+        } catch (JsonProcessingException e) {
+            log.error("Failed to convert list to JSON: {}", e.getMessage());
+            return "[]";  // Return an empty JSON array if conversion fails
+        }
+    }
 
     public Claims getClaims(String token) {
         try {
