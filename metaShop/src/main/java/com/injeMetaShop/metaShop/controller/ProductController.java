@@ -63,8 +63,8 @@ public class ProductController {
     @PostMapping(value = "/add", consumes = { "multipart/form-data"})
     public ResponseEntity<Void> addProduct(
             @RequestPart("product") @Valid ProductDto productDto,
-            @RequestPart(value = "png", required = false) MultipartFile thumbnail,
-            @RequestPart(value = "fbx", required = false) MultipartFile fbxFile) throws IOException {
+            @RequestPart(value = "thumbnail", required = false) MultipartFile thumbnail,
+            @RequestPart(value = "fbxFile", required = false) MultipartFile fbxFile) throws IOException {
 
         productService.addProduct(productDto, thumbnail, fbxFile);
         return new ResponseEntity<>(HttpStatus.OK);
