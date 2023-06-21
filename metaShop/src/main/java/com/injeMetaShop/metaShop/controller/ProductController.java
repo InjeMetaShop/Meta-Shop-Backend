@@ -2,6 +2,8 @@ package com.injeMetaShop.metaShop.controller;
 
 import com.injeMetaShop.metaShop.dto.ProductDto;
 import com.injeMetaShop.metaShop.entity.Product;
+import com.injeMetaShop.metaShop.entity.User;
+import com.injeMetaShop.metaShop.repository.ProductRepository;
 import com.injeMetaShop.metaShop.service.ProductService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -78,4 +80,5 @@ public class ProductController {
             return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
         } return new ResponseEntity(product, HttpStatus.OK);
     }
+
 }
