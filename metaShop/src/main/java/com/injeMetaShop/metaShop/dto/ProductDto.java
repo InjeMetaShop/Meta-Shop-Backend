@@ -22,4 +22,7 @@ public class ProductDto {
 
     @Schema(description = "품목", example = "상의")
     private String category;
+
+    @Schema(description = "승인", example = "false")
+    private String approve;
 }

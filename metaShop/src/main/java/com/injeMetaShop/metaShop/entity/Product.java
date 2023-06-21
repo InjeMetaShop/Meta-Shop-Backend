@@ -40,14 +40,18 @@ public class Product {
     @Field(name = "category")
     private String category;
 
+    @Field(name = "approve")
+    private String approve;
+
     @Builder
-    public Product(String name, int price, String imagePath, String fbxPath, String sex, String category) {
+    public Product(String name, int price, String imagePath, String fbxPath, String sex, String category, String approve) {
         this.name = name;
         this.price = price;
         this.imagePath = imagePath;
         this.fbxPath = fbxPath;
         this.sex = sex;
         this.category = category;
+        this.approve = approve;
     }
 
     public static Product addProduct(ProductDto productDto){
@@ -56,6 +60,7 @@ public class Product {
         product.price = productDto.getPrice();
         product.sex = productDto.getSex();
         product.category = productDto.getCategory();
+        product.approve = productDto.getApprove();
 
         return product;
     }
