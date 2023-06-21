@@ -57,6 +57,7 @@ public class AdminController {
         Product product = productRepository.findById(itemId).orElseThrow(() -> new IllegalArgumentException("Invalid product"));
         try{
             product.setApprove("true");
+            productRepository.save(product);
         }catch (IllegalStateException e){
             return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
         } return new ResponseEntity(product, HttpStatus.OK);

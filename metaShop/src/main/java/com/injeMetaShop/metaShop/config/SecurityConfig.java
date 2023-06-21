@@ -53,7 +53,7 @@ public class SecurityConfig {
             "/api/admin/**"
     };
     private static final String[] AUTH_USER = {
-            "/api/user", "/api/purchase/**", "/api/product/add"
+            "/api/user", "/api/purchase/**"
     };
 
     @Bean
