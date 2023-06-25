@@ -64,6 +64,7 @@ public class User {
                 .password(signupDto.getPassword())
                 .name(signupDto.getName())
                 .role(Role.ADMIN)
+                .purchase(Collections.emptyList())
                 .build();
     }
 }
